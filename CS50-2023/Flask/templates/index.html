@@ -5,11 +5,11 @@
     {% block content%}
 
     <form action='/register' method='post'>
-        <input autocomplete='off' autofocus name='name' placeholder='Name' type="text" required>
-        <select name="option">
+        <input autocomplete='off' autofocus name='name' placeholder='Name' type="text" >
+         <select name="sport">
             <option disabled selected>Sport</option>
-            {% for option in sports %}
-                <option value="{{option}}">{{option}}</option>
+            {% for sport in sports %}
+                <option value="{{ sport }}">{{ sport }}</option>
             {% endfor %}
         </select>
         <button type='submit'>Enviar</button>   
