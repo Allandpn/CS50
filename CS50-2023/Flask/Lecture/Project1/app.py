@@ -1,9 +1,15 @@
 from cs50 import SQL
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
+from flask_session import Session
 
 app = Flask(__name__)
 
 db = SQL("sqlite:///registrants.db")
+
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
 
 
 SPORTS = [
@@ -52,4 +58,23 @@ def deregister():
 
 
 
+
+@app.route("/user")
+def user():
+    if not session.get("name"):
+        return redirect("/login")
+    return render_template("user.html")
+
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    if request.method == "POST":
+        session["name"] = request.form.get("name")
+        return redirect("/user")
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    session["name"] = None
+    return redirect("/user")
 
