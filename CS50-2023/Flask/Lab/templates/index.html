@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Birthdays</title>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Birthdays</h1>
+        </div>
+        <div class="container">
+            <div class="section">
+
+                <h2>Add a Birthday</h2>
+                <form action="/" method="post">
+                    <input name="name" autocomplete="off" autofocus type="text" placeholder="Name" value="">
+                    <input name="month" autocomplete="off" autofocus type="text" placeholder="month" value="">
+                    <input name="day" autocomplete="off" autofocus type="text" placeholder="day" value="">
+                    <button type="submit">Add Birthday</button>
+                </form>
+            </div>
+
+            <div>
+                <form action="/remove" method="post">
+                    <select name="rm_person">
+                        {% for person in birthdays %}
+                        <option value="{{person['id']}}">{{person["name"]}}</option>
+                        {% endfor %}
+                    </select>
+                    <td><button type="submit">Delete</button></td>
+                </form>
+
+                {{id}}
+
+            </div>
+
+            <div class="section">
+
+                <h2>All Birthdays</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for person in birthdays %}
+                        <tr>
+                            <td>{{person["name"]}}</td>
+                            <td>{{person["month"]}}/{{person["day"]}}</td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+
+</html>
